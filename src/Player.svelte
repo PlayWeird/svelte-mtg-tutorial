@@ -1,26 +1,40 @@
+<script>
+  export let score;
+  export let winningText;
+  export let won;
+  export let fontColor;
+  export let gameOver;
+</script>
+
+<div style="color: {fontColor}" class="player">
+  <h2>{score}</h2>
+  <button disabled={gameOver} class="plus">+</button>
+  <button disabled={gameOver} class="minus">-</button>
+  {#if won}
+    <h2>{winningText}</h2>
+  {/if}
+</div>
+
 <style>
-   .player{
+  .player {
     flex-grow: 1;
-   } 
-   .plus{
+  }
+  .plus {
     background-color: seagreen;
-   }
-   .minus{
+  }
+  .minus {
     background-color: brown;
-   }
-   button{
+  }
+  button[disabled] {
+    background-color: gray;
+    pointer-events: none;
+  }
+  button {
     font-size: 20px;
     border-radius: 3px;
     width: 40px;
     color: white;
     font-family: monospace;
     font-weight: bold;
-   }
+  }
 </style>
-
-<div class="player">
-    <h2>20</h2>
-    <button class="plus">+</button>
-    <button class="minus">-</button>
-    <h2>Blue Wins!</h2>
-</div>
