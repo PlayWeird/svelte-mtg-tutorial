@@ -1,16 +1,31 @@
 <script>
   import Player from "./Player.svelte";
+
   let redScore = 20;
   let blueScore = 20;
   $: blueWon = redScore <= 0;
   $: redWon = blueScore <= 0;
   $: gameOver = blueWon || redWon;
+
+  function newGame() {
+    redScore = 20;
+    blueScore = 20;
+  }
+
+  function updateBlueScore(update) {
+    blueScore += update.detail;
+  }
+
+  function updateRedScore(update) {
+    redScore += update.detail;
+  }
 </script>
 
 <main>
   <h1>Magic The Gathering Counter</h1>
   <div id="controls-container">
     <Player
+      on:points={updateBlueScore}
       {gameOver}
       fontColor="#0000AA"
       won={blueWon}
@@ -18,6 +33,7 @@
       score={blueScore}
     />
     <Player
+      on:points={updateRedScore}
       {gameOver}
       fontColor="#AA0000"
       won={redWon}
@@ -25,7 +41,7 @@
       score={redScore}
     />
   </div>
-  <button>Start Game</button>
+  <button on:click={newGame}>Start Game</button>
 </main>
 
 <style>
@@ -45,7 +61,7 @@
     display: block;
     width: 100%;
     margin-top: 20px;
-    border: solid salmon 1px;
+    border: solid salmon 2px;
     background-color: sandybrown;
     color: rgb(61, 56, 56);
     font-size: 20px;
