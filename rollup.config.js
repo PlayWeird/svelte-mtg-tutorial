@@ -71,7 +71,7 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser() && ghpages.publish('publish', () => {
+		production && terser() && ghpages.publish('public', () => {
 			console.log('published to github');
 		})
 	],
